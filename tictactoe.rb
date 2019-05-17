@@ -39,6 +39,7 @@ end
 
 class Player
   include SetSpace
+
   def initialize
     @spaces = Array.new(3){ Array.new(3) }
   end
@@ -107,7 +108,7 @@ class Game
     new_game if new_game?
   end
 
-  def prompt_user()
+  def prompt_user
     while true
       print "Enter coordinates (x,y): "
       input = gets.chomp
@@ -141,10 +142,13 @@ class Game
   end
 
   def get_result
-    result = "Tie game!"
-    result = "Player 'X' wins!" if @player["X"].winner?
-    result = "Player 'O' wins!" if @player["O"].winner?
-    result
+    if @player["X"].winner?
+      "Player 'X' wins!"
+    elsif @player["O"].winner?
+      "Player 'O' wins!"
+    else
+      "Tie game!"
+    end
   end
 
   def new_game?
